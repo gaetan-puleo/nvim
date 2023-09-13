@@ -13,6 +13,10 @@
     flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        initLuaPath = builtins.path { path = ./init.lua; };
+                initLuaContent = builtins.readFile ./init.lua;
+
+
         # Neovim configuration
         myNeovim = pkgs.neovim.override {
           configure = {
@@ -44,6 +48,11 @@
               
                 -- basic tabline
                 require('mini.tabline').setup()
+              ''
+
+            +  initLuaContent
+            +''
+
               EOF
             '';
             packages.myVimPackage = with pkgs.vimPlugins; {
