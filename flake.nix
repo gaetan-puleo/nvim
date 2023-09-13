@@ -1,48 +1,71 @@
 {
-  description = "Environnement de dev perso";
-  ##nixConfig.bash-prompt = "\[nix-develop\ ]$ ";
+  description = "Devbox Flake";
   inputs = {
-    # Nixpkgs / NixOS version to use.
-    # nixpkgs.url = "nixpkgs/nixos-23.05";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      follows = "nixpkgs";
+    };
 
-    
-    # neovim = {
-    #   url = "github:neovim/neovim/stable?dir=contrib";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
+  outputs = { self, nixpkgs, flake-utils, nixvim }:
+    flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        # Neovim configuration
+        myNeovim = pkgs.neovim.override {
+          configure = {
+            customRC = ''
+              " Your custom Neovim configuration here
+              set background=dark
+              colorscheme catppuccin-mocha
 
-  outputs = { self, nixpkgs }: 
-  let 
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-  in { 
-    packages.x86_64-linux.default = pkgs.mkShell {
-      shellHook = ''
-      DEVBOX="~/devbox"
-      alias nuke="rm -rf"
-      alias md="mkdir"
-      alias nvim="nvim -u $DEVBOX/init.vim"
-      alias vim="nvim"
+              " Tree-sitter configuration
+              packadd nvim-treesitter
+              lua <<EOF
+              require'nvim-treesitter.configs'.setup {
+                highlight = {
+                  enable = true,
+                },
+              }
+              EOF
+              "  Mini configuration
 
-        figlet "Welcome to devbox" | lolcat
-      '';
-      nativeBuildInputs = with pkgs; [
-        # lolz
-        figlet
-        lolcat
-        
-        # shell
-        fish
-        
-        nodejs_20
-        neovim
+              lua <<EOF
+                -- basic config
+                require('mini.basics').setup()
 
-        tmux
-        wget
-        curl
-        jq
-      ];
-  };
-};
+                -- statusline
+                require('mini.statusline').setup()
+
+                -- welcome page
+                require('mini.starter').setup()
+              
+                -- basic tabline
+                require('mini.tabline').setup()
+              EOF
+            '';
+            packages.myVimPackage = with pkgs.vimPlugins; {
+              start = [ 
+                nvim-treesitter.withAllGrammars catppuccin-nvim mini-nvim];
+            };
+          };
+        };
+        commonDevbox = pkgs.mkShell {
+          buildInputs = [
+            myNeovim  # Self-contained Neovim
+            pkgs.git
+            pkgs.curl
+            pkgs.htop
+            # Add common development tools here
+            # pkgs.neovim
+            pkgs.tree
+          ];
+        };
+      in {
+        defaultPackage = commonDevbox;
+        devbox = commonDevbox;
+      }
+    );
 }
