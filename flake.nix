@@ -19,7 +19,7 @@
   in { 
     packages.x86_64-linux.default = pkgs.mkShell {
       shellHook = ''
-      DEVBOX="~/devbox-flake"
+      DEVBOX="~/devbox"
       alias nuke="rm -rf"
       alias md="mkdir"
       alias nvim="nvim -u $DEVBOX/init.vim"
