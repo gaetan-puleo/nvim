@@ -7,14 +7,46 @@
       url = "github:nix-community/nixvim";
       follows = "nixpkgs";
     };
+    neotree = {
+      url = "github:nvim-neo-tree/neo-tree.nvim";
+      flake = false;
+    };
+    plenary= {
+      url = "github:nvim-lua/plenary.nvim";
+      flake = false;
+    };
+    nui = {
+      url = "github:MunifTanjim/nui.nvim";
+      flake = false;
+    };
 
   };
-  outputs = { self, nixpkgs, flake-utils, nixvim }:
+  outputs = { self, nixpkgs, flake-utils, nixvim, neotree, plenary, nui }:
     flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        initLuaPath = builtins.path { path = ./init.lua; };
-                initLuaContent = builtins.readFile ./init.lua;
+        initLuaContent = builtins.readFile ./init.lua;
+        # nvim-neotree = pkgs.stdenvNoCC.mkDerivation rec {
+        #   name = "neotree";
+        #   src = neotree;
+        #   dontBuild = true;
+        # };
+        nvim-neotree = pkgs.vimUtils.buildVimPlugin {
+          name = "neotree";
+          src = neotree;
+          dontBuild = true;
+        };
+        nvim-plenary = pkgs.vimUtils.buildVimPlugin {
+          name = "plenary";
+          src = plenary;
+          dontBuild = true;
+        };
+        nui-nvim = pkgs.vimUtils.buildVimPlugin {
+          name = "nui";
+          src = nui;
+          dontBuild = true;
+        };
+    
 
 
         # Neovim configuration
@@ -37,17 +69,6 @@
               "  Mini configuration
 
               lua <<EOF
-                -- basic config
-                require('mini.basics').setup()
-
-                -- statusline
-                require('mini.statusline').setup()
-
-                -- welcome page
-                require('mini.starter').setup()
-              
-                -- basic tabline
-                require('mini.tabline').setup()
               ''
 
             +  initLuaContent
@@ -57,7 +78,7 @@
             '';
             packages.myVimPackage = with pkgs.vimPlugins; {
               start = [ 
-                nvim-treesitter.withAllGrammars catppuccin-nvim mini-nvim];
+                nvim-treesitter.withAllGrammars catppuccin-nvim mini-nvim nvim-neotree nvim-plenary nui-nvim];
             };
           };
         };
@@ -70,6 +91,7 @@
             # Add common development tools here
             # pkgs.neovim
             pkgs.tree
+            pkgs.gnumake
           ];
         };
       in {

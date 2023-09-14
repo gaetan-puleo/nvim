@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "neotree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693916828,
+        "narHash": "sha256-l/BA+H8vKSUlixsfJLPkjaVryVRn/e0rmJv07V4V9nY=",
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "rev": "2d89ca96e08eb6e9c8e50e1bb4738bc5125c9f12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1694593561,
@@ -34,13 +50,48 @@
         "type": "github"
       }
     },
+    "nui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693988908,
+        "narHash": "sha256-Ao+xnowsZPR9x3Wm439l1QIlgt3Rt6n9DZIqkUKsR1k=",
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "rev": "c8de23342caf8d50b15d6b28368d36a56a69d76f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "type": "github"
+      }
+    },
+    "plenary": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1694526433,
+        "narHash": "sha256-s3qsKf05X5W1VdZT1vYXGQNK0UaiI+umWUf06Spe4hw=",
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "rev": "9ce85b0f7dcfe5358c0be937ad23e456907d410b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "neotree": "neotree",
         "nixpkgs": "nixpkgs",
         "nixvim": [
           "nixpkgs"
-        ]
+        ],
+        "nui": "nui",
+        "plenary": "plenary"
       }
     },
     "systems": {
