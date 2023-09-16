@@ -1,102 +1,61 @@
 {
-  description = "Devbox Flake";
-  inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      follows = "nixpkgs";
+  description = "A very basic flake";
+
+  inputs.nixvim.url = "github:nix-community/nixvim";
+  inputs.flake-utils.url = "github:numtide/flake-utils";
+
+  outputs = {
+    self,
+    nixpkgs,
+    nixvim,
+    flake-utils,
+  }: let
+    config = {
+      colorschemes.gruvbox.enable = true;
     };
-    neotree = {
-      url = "github:nvim-neo-tree/neo-tree.nvim";
-      flake = false;
-    };
-    plenary= {
-      url = "github:nvim-lua/plenary.nvim";
-      flake = false;
-    };
-    nui = {
-      url = "github:MunifTanjim/nui.nvim";
-      flake = false;
-    };
+  in
+    flake-utils.lib.eachDefaultSystem (system: let
+	  nixvim' = nixvim.legacyPackages."${system}";
+      nvim = nixvim'.makeNixvim {
+        # colorscheme
+        colorschemes.catppuccin.enable = true;
+        colorschemes.catppuccin.flavour = "mocha";
 
-  };
-  outputs = { self, nixpkgs, flake-utils, nixvim, neotree, plenary, nui }:
-    flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        initLuaContent = builtins.readFile ./init.lua;
-        # nvim-neotree = pkgs.stdenvNoCC.mkDerivation rec {
-        #   name = "neotree";
-        #   src = neotree;
-        #   dontBuild = true;
-        # };
-        nvim-neotree = pkgs.vimUtils.buildVimPlugin {
-          name = "neotree";
-          src = neotree;
-          dontBuild = true;
+        # lsp
+        plugins.lsp.enable = true ;
+        
+        # statusline
+        plugins.lightline.enable = true;
+
+        # treesitter
+        plugins.treesitter.enable = true;
+        plugins.treesitter.ensureInstalled = "all";
+
+        plugins.ts-autotag.enable = true;
+        plugins.treesitter-refactor.enable = true;
+        plugins.ts-context-commentstring.enable = true;
+
+        # plugins
+        plugins.mini.enable = true;
+        plugins.mini.modules = {
+          starter = {};
+          cursorword = {};
+          tabline = {};
+          basics = {};
+          indentscope = {};
+          clue = {};
         };
-        nvim-plenary = pkgs.vimUtils.buildVimPlugin {
-          name = "plenary";
-          src = plenary;
-          dontBuild = true;
-        };
-        nui-nvim = pkgs.vimUtils.buildVimPlugin {
-          name = "nui";
-          src = nui;
-          dontBuild = true;
-        };
-    
 
+        # git
+        plugins.gitsigns.enable = true;
 
-        # Neovim configuration
-        myNeovim = pkgs.neovim.override {
-          configure = {
-            customRC = ''
-              " Your custom Neovim configuration here
-              set background=dark
-              colorscheme catppuccin-mocha
-
-              " Tree-sitter configuration
-              packadd nvim-treesitter
-              lua <<EOF
-              require'nvim-treesitter.configs'.setup {
-                highlight = {
-                  enable = true,
-                },
-              }
-              EOF
-              "  Mini configuration
-
-              lua <<EOF
-              ''
-
-            +  initLuaContent
-            +''
-
-              EOF
-            '';
-            packages.myVimPackage = with pkgs.vimPlugins; {
-              start = [ 
-                nvim-treesitter.withAllGrammars catppuccin-nvim mini-nvim nvim-neotree nvim-plenary nui-nvim];
-            };
-          };
-        };
-        commonDevbox = pkgs.mkShell {
-          buildInputs = [
-            myNeovim  # Self-contained Neovim
-            pkgs.git
-            pkgs.curl
-            pkgs.htop
-            # Add common development tools here
-            # pkgs.neovim
-            pkgs.tree
-            pkgs.gnumake
-          ];
-        };
-      in {
-        defaultPackage = commonDevbox;
-        devbox = commonDevbox;
-      }
-    );
+        # filetree
+        plugins.neo-tree.enable = true;
+      };
+    in {
+      packages = {
+        inherit nvim;
+        default = nvim;
+      };
+    });
 }
