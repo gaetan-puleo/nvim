@@ -56,6 +56,10 @@
         plugins.treesitter-refactor.enable = true;
         plugins.ts-context-commentstring.enable = true;
 
+        # telescope
+        plugins.telescope = import "${self}/config/plugins/telescope.nix";
+
+
         # plugins
 	      plugins.mini = import "${self}/config/plugins/mini.nix";
 

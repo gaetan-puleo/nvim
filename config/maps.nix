@@ -50,4 +50,12 @@
     action = "gc";
     desc = "Toggle Comment";
   };
+
+  # telescope  
+  normal."<leader>ff" = {
+    silent = true;
+    action = "<CMD> Telescope find_files <CR>";
+    desc = "Toggle Comment";
+  };
+
 }
