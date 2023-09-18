@@ -1,4 +1,27 @@
 {
+  # 
+  normal."<leader><leader>" = {
+    silent = true;
+    action = "<Cmd>e# <CR>";
+    desc = "See previous file";
+  };
+  normal."<Space>" = {
+    silent = true;
+    action = "<Nop";
+    desc = "Clear highlight";
+  };
+  normal."k" = {
+    silent = true;
+    action = "v:count == 0 ? 'gk' : 'k'";
+    expr = true;
+  };
+
+  normal."j" = {
+    silent = true;
+    action = "v:count == 0 ? 'gj' : 'j'";
+    expr = true;
+  };
+  
   # neo-tree
   normal."<leader>fe" = {
     silent = true;

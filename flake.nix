@@ -26,10 +26,17 @@
       pkgs = nixpkgs.legacyPackages."${system}";
       nvim = nixvim.legacyPackages."${system}".makeNixvim {
         extraConfigLua = "" + 
+        "vim.wo.numberwidth = 4 -- columns number in gutter" +
+
         builtins.readFile "${self}/config/plugins/nvim-comment.lua";
         
-        # options
+        # settings
         globals.mapleader = " "; # Sets the leader key to space
+        globals.maplocalleader = " "; # Sets the leader key to space
+        options = import "${self}/config/options.nix";
+        globals.cursorholdUpdatetime = 100;
+
+
         maps = import "${self}/config/maps.nix";
         # colorscheme
         colorschemes.catppuccin.enable = true;

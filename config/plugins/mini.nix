@@ -1,7 +1,7 @@
 {
 	enable = true;
 	modules = {
-	  starter = {};
+	starter = {};
 	  cursorword = {};
 	  tabline = {};
 	  basics = {};
