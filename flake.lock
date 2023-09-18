@@ -182,6 +182,22 @@
         "type": "github"
       }
     },
+    "nvim-comment-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660082200,
+        "narHash": "sha256-O2jhrjXxKaWHMfm3YJ9+92Onm0niEHfUp5kOh2gETuc=",
+        "owner": "terrortylor",
+        "repo": "nvim-comment",
+        "rev": "e9ac16ab056695cad6461173693069ec070d2b23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "terrortylor",
+        "repo": "nvim-comment",
+        "type": "github"
+      }
+    },
     "nvim-window-picker-src": {
       "flake": false,
       "locked": {
@@ -255,6 +271,7 @@
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "nvim-comment-src": "nvim-comment-src",
         "nvim-window-picker-src": "nvim-window-picker-src"
       }
     },

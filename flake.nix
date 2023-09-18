@@ -1,6 +1,5 @@
-{
+{ 
   description = "My neovim config";
-
   inputs.nixvim.url = "github:nix-community/nixvim";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
@@ -10,25 +9,25 @@
     flake = false;
   };
 
+  inputs.nvim-comment-src = {
+    url = "github:terrortylor/nvim-comment";
+    flake = false;
+  };
+
   outputs = {
     self,
     nixpkgs,
     nixvim,
     flake-utils,
-    nvim-window-picker-src
-  }: let
-    config = {
-      colorschemes.gruvbox.enable = true;
-    };
-  in
+    nvim-window-picker-src,
+    nvim-comment-src
+  }:
     flake-utils.lib.eachDefaultSystem (system: let
-    pkgs = nixpkgs.legacyPackages.${system};
-    window-picker = (pkgs.vimUtils.buildVimPlugin {
-              name = "nvim-window-picker";
-              src = nvim-window-picker-src;
-            });
-	  nixvim' = nixvim.legacyPackages."${system}";
-      nvim = nixvim'.makeNixvim {
+      pkgs = nixpkgs.legacyPackages."${system}";
+      nvim = nixvim.legacyPackages."${system}".makeNixvim {
+        extraConfigLua = "" + 
+        builtins.readFile "${self}/config/plugins/nvim-comment.lua";
+        
         # options
         globals.mapleader = " "; # Sets the leader key to space
         maps = import "${self}/config/maps.nix";
@@ -51,15 +50,7 @@
         plugins.ts-context-commentstring.enable = true;
 
         # plugins
-        plugins.mini.enable = true;
-        plugins.mini.modules = {
-          starter = {};
-          cursorword = {};
-          tabline = {};
-          basics = {};
-          indentscope = {};
-          clue = {};
-        };
+	      plugins.mini = import "${self}/config/plugins/mini.nix";
 
         # git
         plugins.gitsigns.enable = true;
@@ -68,9 +59,17 @@
         plugins.neo-tree = import "${self}/config/plugins/neo-tree.nix";
 
         extraPlugins = [
-            # window picker
-            window-picker
-          ];
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-window-picker";
+            src = nvim-window-picker-src;
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-comment";
+            src = nvim-comment-src;
+            buildPhase = ":";
+          })
+        ];
       };
     in {
       packages = {
