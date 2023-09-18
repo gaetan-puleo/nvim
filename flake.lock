@@ -182,6 +182,22 @@
         "type": "github"
       }
     },
+    "nvim-window-picker-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690613469,
+        "narHash": "sha256-KIeHBZMjzrP+AtRugId73TK/koy2bjz/YYhHamHpQrc=",
+        "owner": "s1n7ax",
+        "repo": "nvim-window-picker",
+        "rev": "1b1bb834b0acb9eebb11a61664efc665757f1ba2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "s1n7ax",
+        "repo": "nvim-window-picker",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": [
@@ -238,7 +254,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "nvim-window-picker-src": "nvim-window-picker-src"
       }
     },
     "systems": {
