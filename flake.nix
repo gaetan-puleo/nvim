@@ -79,8 +79,13 @@
           (pkgs.vimUtils.buildVimPlugin {
             name = "nvim-comment";
             src = nvim-comment-src;
-            buildPhase = ":";
+            buildPhase = ":"; # ignore build phase
           })
+        ];
+
+        # neovim dependancies
+        extraPackages = [
+          pkgs.ripgrep
         ];
       };
     in {

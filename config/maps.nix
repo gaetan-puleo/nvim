@@ -55,7 +55,26 @@
   normal."<leader>ff" = {
     silent = true;
     action = "<CMD> Telescope find_files <CR>";
-    desc = "Toggle Comment";
+    desc = "[F]ind [F]iles";
   };
-
+  normal."<leader>fg" = {
+    silent = true;
+    action = "<CMD> Telescope live_grep <CR>";
+    desc = "[F]ind with [G]rep";
+  };
+  normal."<leader>?" = {
+    silent = true;
+    action = "<CMD> Telescope keymaps <CR>";
+    desc = "Show keymaps";
+  };
+  normal."<leader>gh" = {
+    silent = true;
+    action = "<CMD> Telescope git_commits <CR>";
+    desc = "Show [G]it [H]istory";
+  };
+    normal."<leader>gb" = {
+    silent = true;
+    action = "<CMD> Telescope git_branches <CR>";
+    desc = "Select [G]it [B]ranches";
+  };
 }

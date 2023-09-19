@@ -1,11 +1,14 @@
 {
   enable = true;
-  extraOptions = {
+  defaults = {
     mappings = {
       i = {
-        "<esc>" = "require('telescope.actions').close";
-        "<C-j>" = "require('telescope.actions').preview_scrolling_down";
-        "<C-k>" = "require('telescope.actions')actions.preview_scrolling_up";
+        "<esc>" = { __raw = "require('telescope.actions').close"; };
+        "<C-j>" = { __raw = "require('telescope.actions').preview_scrolling_down"; };
+        "<C-k>" = { __raw = "require('telescope.actions').preview_scrolling_up"; };
+      };
+      n = {
+        "q" = {__raw = "require('telescope.actions').close";};
       };
     };
     
