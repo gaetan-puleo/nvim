@@ -11,7 +11,7 @@
 - [ ] hlslens 
 - [ ] nvim colorizer 
 - [ ] cmp 
-- [ ] mini startur 
-- [ ] treesitter 
+- [ ] mini startur[]
+- [-] treesitter 
 - [ ] formatter nvim 
-- [ ] gitsigns nvim 
+- [x] gitsigns nvim 

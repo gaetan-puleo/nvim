@@ -64,7 +64,8 @@
 	      plugins.mini = import "${self}/config/plugins/mini.nix";
 
         # git
-        plugins.gitsigns.enable = true;
+	      plugins.gitsigns = import "${self}/config/plugins/gitsigns.nix";
+
 
         # filetree
         plugins.neo-tree = import "${self}/config/plugins/neo-tree.nix";
