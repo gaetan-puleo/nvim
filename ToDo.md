@@ -1,7 +1,7 @@
 # Stable config
 
 - [ ] Configure LSP
-- [ ] Configure Telescope
+- [+] Configure Telescope
 - [ ] Configure lsp lightbulb
 - [ ] Configure global search and replace (nvim spectre)
 - [ ] which key (remove mini keys)
