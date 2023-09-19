@@ -15,3 +15,4 @@
 - [-] treesitter 
 - [ ] formatter nvim 
 - [x] gitsigns nvim 
+- [-] nvim ufo (code folding)

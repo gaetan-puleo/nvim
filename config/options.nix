@@ -56,4 +56,12 @@
 
   listchars = { eol = "↵"; trail = "~"; tab = ">-"; nbsp = "␣"; space = "_"; };
 
+  foldenable = true;
+  fillchars = "eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵";
+  foldlevel = 99;
+  foldcolumn = "1";
+  foldlevelstart = 99;
+
+
+
 }

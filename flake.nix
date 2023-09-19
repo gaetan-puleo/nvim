@@ -25,7 +25,28 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
       nvim = nixvim.legacyPackages."${system}".makeNixvim {
-        extraConfigLua = "" + 
+        extraFiles = {
+          lua = "./lua";
+        };
+        extraConfigLuaPost = "" + 
+        "vim.api.nvim_command('set runtimepath^=${self}') \n" +
+        "vim.api.nvim_command('let &packpath = &runtimepath') \n" +
+        ''
+        if(not vim.g.vscode) then
+          require('settings/global')
+          require('settings/mapping')
+          require('plugin-list')
+
+        end
+        ''+
+
+        ''
+        if(vim.g.vscode) then
+          require('settings/global')
+          require('settings/mapping')
+        end
+        '' +
+        # "dofile('${self}/lua/test.lua')" +
         "vim.wo.numberwidth = 4 -- columns number in gutter" +
 
         builtins.readFile "${self}/config/plugins/nvim-comment.lua";
@@ -48,9 +69,12 @@
         # statusline
         plugins.lightline.enable = true;
 
+        # fold code
+        plugins.nvim-ufo = import "${self}/config/plugins/nvim-ufo.nix";
+
+
         # treesitter
-        plugins.treesitter.enable = true;
-        plugins.treesitter.ensureInstalled = "all";
+        plugins.treesitter.enable = true;      
 
         plugins.ts-autotag.enable = true;
         plugins.treesitter-refactor.enable = true;
@@ -68,7 +92,7 @@
 
 
         # filetree
-        plugins.neo-tree = import "${self}/config/plugins/neo-tree.nix";
+        plugins.neo-tree.enable = true;
 
         extraPlugins = [
           (pkgs.vimUtils.buildVimPlugin {
