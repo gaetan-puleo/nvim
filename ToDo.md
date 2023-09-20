@@ -1,18 +1,18 @@
 # Stable config
 
 - [ ] Configure LSP
-- [+] Configure Telescope
+- [x] Configure Telescope
 - [ ] Configure lsp lightbulb
-- [ ] Configure global search and replace (nvim spectre)
+- [x] Configure global search and replace (nvim spectre)
 - [ ] which key (remove mini keys)
 - [ ] vim tmux navigator
 - [ ] nvim lint
-- [ ] nvim scrollbar 
-- [ ] hlslens 
-- [ ] nvim colorizer 
+- [x] nvim scrollbar 
+- [x] hlslens 
+- [x] nvim colorizer 
 - [ ] cmp 
-- [ ] mini startur[]
-- [-] treesitter 
+- [x] mini startur[]
+- [+] treesitter 
 - [ ] formatter nvim 
 - [x] gitsigns nvim 
-- [-] nvim ufo (code folding)
+- [x] nvim ufo (code folding)

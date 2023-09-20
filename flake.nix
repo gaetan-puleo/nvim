@@ -1,17 +1,45 @@
-{ 
+{
   description = "My neovim config";
-  inputs.nixvim.url = "github:nix-community/nixvim";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixvim.url = "github:nix-community/nixvim";
+    flake-utils.url = "github:numtide/flake-utils";
 
   # plugins
-  inputs.nvim-window-picker-src = {
-    url = "github:s1n7ax/nvim-window-picker";
-    flake = false;
-  };
+    nvim-window-picker-src = {
+      url = "github:s1n7ax/nvim-window-picker";
+      flake = false;
+    };
 
-  inputs.nvim-comment-src = {
-    url = "github:terrortylor/nvim-comment";
-    flake = false;
+    nvim-comment-src = {
+      url = "github:terrortylor/nvim-comment";
+      flake = false;
+    };
+
+    nvim-scrollbar-src = {
+      url = "github:petertriho/nvim-scrollbar";
+      flake = false;
+    };
+
+    nvim-colorizer-src = {
+      url = "github:NvChad/nvim-colorizer.lua";
+      flake = false;
+    };
+
+    nvim-spectre-src = {
+      url = "github:nvim-pack/nvim-spectre";
+      flake = false;
+    };
+
+    plenary-src = {
+      url = "github:nvim-lua/plenary.nvim";
+      flake = false;
+    };
+
+    nvim-hlslens-src = {
+      url = "github:kevinhwang91/nvim-hlslens";
+      flake = false;
+    };
+
   };
 
   outputs = {
@@ -20,7 +48,12 @@
     nixvim,
     flake-utils,
     nvim-window-picker-src,
-    nvim-comment-src
+    nvim-comment-src,
+    nvim-scrollbar-src,
+    nvim-colorizer-src,
+    nvim-spectre-src,
+    plenary-src,
+    nvim-hlslens-src,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -38,18 +71,14 @@
           require('plugin-list')
 
         end
-        ''+
 
-        ''
         if(vim.g.vscode) then
           require('settings/global')
           require('settings/mapping')
         end
         '' +
-        # "dofile('${self}/lua/test.lua')" +
-        "vim.wo.numberwidth = 4 -- columns number in gutter" +
+        "vim.wo.numberwidth = 4 -- columns number in gutter";
 
-        builtins.readFile "${self}/config/plugins/nvim-comment.lua";
         
         # settings
         globals.mapleader = " "; # Sets the leader key to space
@@ -81,14 +110,14 @@
         plugins.ts-context-commentstring.enable = true;
 
         # telescope
-        plugins.telescope = import "${self}/config/plugins/telescope.nix";
+        plugins.telescope.enable = true;
 
 
         # plugins
-	      plugins.mini = import "${self}/config/plugins/mini.nix";
+	      plugins.mini.enable = true;
 
         # git
-	      plugins.gitsigns = import "${self}/config/plugins/gitsigns.nix";
+	      plugins.gitsigns.enable = true;
 
 
         # filetree
@@ -105,6 +134,39 @@
             src = nvim-comment-src;
             buildPhase = ":"; # ignore build phase
           })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-scrollbar";
+            src = nvim-scrollbar-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-colorizer";
+            src = nvim-colorizer-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-spectre";
+            src = nvim-spectre-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "plenary.nvim";
+            src = plenary-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "hlslens";
+            src = nvim-hlslens-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          pkgs.vimPlugins.nvim-treesitter.withAllGrammars
         ];
 
         # neovim dependancies
