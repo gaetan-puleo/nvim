@@ -82,3 +82,6 @@ vim.o.incsearch = true
 vim.o.inccommand = "nosplit"
 
 vim.opt.listchars = {eol = '↵',trail = '~',tab = '>-', nbsp = '␣', space = "_"}
+
+--global statusline
+vim.opt.laststatus = 3

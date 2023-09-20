@@ -346,6 +346,22 @@
         "type": "github"
       }
     },
+    "promise-async-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681037971,
+        "narHash": "sha256-TR8DbOJSZuIeqaOx6sMrs3mBc+yYnWyEzhbasQvvWzE=",
+        "owner": "kevinhwang91",
+        "repo": "promise-async",
+        "rev": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kevinhwang91",
+        "repo": "promise-async",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -357,7 +373,25 @@
         "nvim-scrollbar-src": "nvim-scrollbar-src",
         "nvim-spectre-src": "nvim-spectre-src",
         "nvim-window-picker-src": "nvim-window-picker-src",
-        "plenary-src": "plenary-src"
+        "plenary-src": "plenary-src",
+        "promise-async-src": "promise-async-src",
+        "statuscol-nvim-src": "statuscol-nvim-src"
+      }
+    },
+    "statuscol-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693133636,
+        "narHash": "sha256-d6BwcO6QvC35NVPxxjbGQ7ILV2mIQGTzT1lL3pHRREU=",
+        "owner": "luukvbaal",
+        "repo": "statuscol.nvim",
+        "rev": "0944234914438695050eec6f83b4669864680c1a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "luukvbaal",
+        "repo": "statuscol.nvim",
+        "type": "github"
       }
     },
     "systems": {

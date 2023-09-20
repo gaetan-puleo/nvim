@@ -40,6 +40,17 @@
       flake = false;
     };
 
+
+    statuscol-nvim-src = {
+      url = "github:luukvbaal/statuscol.nvim";
+      flake = false;
+    };
+
+    promise-async-src = {
+      url = "github:kevinhwang91/promise-async";
+      flake = false;
+    };
+
   };
 
   outputs = {
@@ -54,6 +65,8 @@
     nvim-spectre-src,
     plenary-src,
     nvim-hlslens-src,
+    statuscol-nvim-src,
+    promise-async-src,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -93,14 +106,22 @@
         colorschemes.catppuccin.flavour = "mocha";
 
         # lsp
-        plugins.lsp.enable = true ;
+        plugins.lsp.enable = true;
+        plugins.nvim-lightbulb.enable = true;
+        plugins.lsp.servers.tsserver.enable = true;
+        plugins.lsp.servers.tailwindcss.enable = true;
+        plugins.lsp.servers.html.enable = true;
+        plugins.lsp.servers.jsonls.enable = true;
+        plugins.lsp.servers.cssls.enable = true;
         
         # statusline
-        plugins.lightline.enable = true;
+        # plugins.lualine.enable = true;
 
         # fold code
-        plugins.nvim-ufo = import "${self}/config/plugins/nvim-ufo.nix";
+        plugins.nvim-ufo.enable = true;
 
+        # tabline
+        plugins.bufferline.enable = true;
 
         # treesitter
         plugins.treesitter.enable = true;      
@@ -165,6 +186,17 @@
           (pkgs.vimUtils.buildVimPlugin {
             name = "hlslens";
             src = nvim-hlslens-src;
+            buildPhase = ":"; # ignore build phase
+          })
+         (pkgs.vimUtils.buildVimPlugin {
+            name = "statuscol.nvim";
+            src =  statuscol-nvim-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+         (pkgs.vimUtils.buildVimPlugin {
+            name = "promise-async";
+            src = promise-async-src;
             buildPhase = ":"; # ignore build phase
           })
 

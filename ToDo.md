@@ -1,6 +1,6 @@
 # Stable config
 
-- [ ] Configure LSP
+- [x] Configure LSP
 - [x] Configure Telescope
 - [ ] Configure lsp lightbulb
 - [x] Configure global search and replace (nvim spectre)
@@ -11,7 +11,7 @@
 - [x] hlslens 
 - [x] nvim colorizer 
 - [ ] cmp 
-- [x] mini startur[]
+- [x] mini startup
 - [x] treesitter 
 - [ ] formatter nvim 
 - [x] gitsigns nvim 
