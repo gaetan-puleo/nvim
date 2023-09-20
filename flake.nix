@@ -123,6 +123,9 @@
         # filetree
         plugins.neo-tree.enable = true;
 
+        # tmux
+        plugins.tmux-navigator.enable = true;
+
         extraPlugins = [
           (pkgs.vimUtils.buildVimPlugin {
             name = "nvim-window-picker";
@@ -140,7 +143,6 @@
             src = nvim-scrollbar-src;
             buildPhase = ":"; # ignore build phase
           })
-
 
           (pkgs.vimUtils.buildVimPlugin {
             name = "nvim-colorizer";

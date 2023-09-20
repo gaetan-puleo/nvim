@@ -5,14 +5,14 @@
 - [ ] Configure lsp lightbulb
 - [x] Configure global search and replace (nvim spectre)
 - [ ] which key (remove mini keys)
-- [ ] vim tmux navigator
+- [x] vim tmux navigator
 - [ ] nvim lint
 - [x] nvim scrollbar 
 - [x] hlslens 
 - [x] nvim colorizer 
 - [ ] cmp 
 - [x] mini startur[]
-- [+] treesitter 
+- [x] treesitter 
 - [ ] formatter nvim 
 - [x] gitsigns nvim 
 - [x] nvim ufo (code folding)
