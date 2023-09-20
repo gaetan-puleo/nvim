@@ -40,7 +40,6 @@
       flake = false;
     };
 
-
     statuscol-nvim-src = {
       url = "github:luukvbaal/statuscol.nvim";
       flake = false;
@@ -48,6 +47,16 @@
 
     promise-async-src = {
       url = "github:kevinhwang91/promise-async";
+      flake = false;
+    };
+
+    nvim-lint-src = {
+      url = "github:mfussenegger/nvim-lint";
+      flake = false;
+    };
+
+    formatter-src = {
+      url = "github:mhartington/formatter.nvim";
       flake = false;
     };
 
@@ -67,6 +76,8 @@
     nvim-hlslens-src,
     statuscol-nvim-src,
     promise-async-src,
+    nvim-lint-src,
+    formatter-src,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -98,6 +109,7 @@
         globals.maplocalleader = " "; # Sets the leader key to space
         options = import "${self}/config/options.nix";
         globals.cursorholdUpdatetime = 100;
+    
 
 
         maps = import "${self}/config/maps.nix";
@@ -113,6 +125,22 @@
         plugins.lsp.servers.html.enable = true;
         plugins.lsp.servers.jsonls.enable = true;
         plugins.lsp.servers.cssls.enable = true;
+        plugins.lsp.keymaps.lspBuf = {
+          K = "hover";
+          gd = "definition";
+          gD = "declaration";
+          gi = "implementation";
+          gt = "type_definition";
+          # gr = "type_references";
+          # gR = "rename";
+          # "<leader>la" = "code_action";
+        };
+        plugins.lsp.keymaps.diagnostic = {
+          "<leader>ld" = "open_float";
+          "<leader>[d" = "goto_prev";
+          "<leader>]d" = "goto_next";
+        };
+
         
         # statusline
         # plugins.lualine.enable = true;
@@ -200,12 +228,26 @@
             buildPhase = ":"; # ignore build phase
           })
 
+
+         (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-lint";
+            src = nvim-lint-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "formatter.nvim";
+            src = formatter-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
         ];
 
         # neovim dependancies
         extraPackages = [
           pkgs.ripgrep
+          # pkgs.nodePackages_latest.prettier
         ];
       };
     in {

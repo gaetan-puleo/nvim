@@ -1,18 +1,29 @@
 # Stable config
 
 - [x] Configure LSP
+- [ ] LSP ISSUES
+  - [ ] Formatage eslint on save
+  - [ ] Add sonarlint
+  - [ ] autocomplete
 - [x] Configure Telescope
-- [ ] Configure lsp lightbulb
+- [x] Configure lsp lightbulb
 - [x] Configure global search and replace (nvim spectre)
 - [ ] which key (remove mini keys)
 - [x] vim tmux navigator
-- [ ] nvim lint
+- [x] nvim lint
 - [x] nvim scrollbar 
 - [x] hlslens 
 - [x] nvim colorizer 
 - [ ] cmp 
 - [x] mini startup
 - [x] treesitter 
-- [ ] formatter nvim 
+- [ ] formatter nvim (prettier is not found, I should fix this issue) 
 - [x] gitsigns nvim 
 - [x] nvim ufo (code folding)
+- [ ] Add snippets
+- [ ] Add AI TOOLS
+- [ ] Add sonar lint
+    - [ ] Codium ? nix issue
+    - [ ] chatgpt like
+    - [ ] check code llama
+    - [ ] integrate tests
