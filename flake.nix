@@ -131,9 +131,9 @@
           gD = "declaration";
           gi = "implementation";
           gt = "type_definition";
-          # gr = "type_references";
-          # gR = "rename";
-          # "<leader>la" = "code_action";
+          gr = "references";
+          gR = "rename";
+          "<leader>la" = "code_action";
         };
         plugins.lsp.keymaps.diagnostic = {
           "<leader>ld" = "open_float";
@@ -174,6 +174,14 @@
 
         # tmux
         plugins.tmux-navigator.enable = true;
+
+        # completion
+        plugins.luasnip.enable = true;
+        plugins.nvim-cmp.enable = true;
+        plugins.cmp_luasnip.enable = true;
+        plugins.cmp-buffer.enable = true;
+        plugins.cmp-nvim-lsp.enable = true;
+        plugins.cmp-nvim-lsp-signature-help.enable = true;
 
         extraPlugins = [
           (pkgs.vimUtils.buildVimPlugin {
@@ -242,11 +250,17 @@
           })
 
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+
+          # pkgs.vimPlugins.codeium-vim
+
+          pkgs.vimPlugins.ChatGPT-nvim
+          pkgs.vimPlugins.nui-nvim
         ];
 
         # neovim dependancies
         extraPackages = [
           pkgs.ripgrep
+          pkgs.curl
           # pkgs.nodePackages_latest.prettier
         ];
       };

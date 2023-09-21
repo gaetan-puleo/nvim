@@ -14,3 +14,8 @@ require("plugins/bufferline-nvim")
 require("plugins/nvim-lightbulb")
 require("plugins/nvim-lint")
 require("plugins/formatter-nvim")
+require("plugins/nvim-cmp")
+
+require("chatgpt").setup({
+--   api_key_cmd = "echo ";
+})
