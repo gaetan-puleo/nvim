@@ -140,10 +140,14 @@
           "<leader>[d" = "goto_prev";
           "<leader>]d" = "goto_next";
         };
-
+        # clipboard
+        clipboard.providers.xclip.enable = true;
         
         # statusline
         # plugins.lualine.enable = true;
+
+        # which key
+        plugins.which-key.enable = true;
 
         # fold code
         plugins.nvim-ufo.enable = true;
@@ -175,11 +179,15 @@
         # tmux
         plugins.tmux-navigator.enable = true;
 
+        # harpoon
+        plugins.harpoon.enable = true;
+
         # completion
         plugins.luasnip.enable = true;
         plugins.nvim-cmp.enable = true;
         plugins.cmp_luasnip.enable = true;
         plugins.cmp-buffer.enable = true;
+        plugins.cmp-path.enable = true;
         plugins.cmp-nvim-lsp.enable = true;
         plugins.cmp-nvim-lsp-signature-help.enable = true;
 

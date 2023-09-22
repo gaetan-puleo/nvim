@@ -1,4 +1,3 @@
-
 local map = vim.api.nvim_set_keymap
 
 vim.keymap.set('n', '<leader>fe', "<Cmd>Neotree toggle source=filesystem reveal<CR>", {desc = 'Toggle [F]iles [E]xplorer'})
