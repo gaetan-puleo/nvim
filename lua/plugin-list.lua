@@ -17,7 +17,3 @@ require("plugins/formatter-nvim")
 require("plugins/nvim-cmp")
 require("plugins/which-key")
 require("plugins/harpoon")
-
-require("chatgpt").setup({
---   api_key_cmd = "echo ";
-})

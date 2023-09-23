@@ -23,6 +23,22 @@
         "type": "github"
       }
     },
+    "dressing-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693892333,
+        "narHash": "sha256-6mTq4DnCcZeXKcNqPB2bAQdEDvQ3MJ2UergLSsmgqk8=",
+        "owner": "stevearc",
+        "repo": "dressing.nvim",
+        "rev": "c1e1d5fa44fe08811b6ef4aadac2b50e602f9504",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "dressing.nvim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -396,6 +412,7 @@
     },
     "root": {
       "inputs": {
+        "dressing-src": "dressing-src",
         "flake-utils": "flake-utils",
         "formatter-src": "formatter-src",
         "nixpkgs": "nixpkgs",

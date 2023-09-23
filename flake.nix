@@ -60,6 +60,11 @@
       flake = false;
     };
 
+    dressing-src = {
+      url = "github:stevearc/dressing.nvim";
+      flake = false;
+    };
+
   };
 
   outputs = {
@@ -78,6 +83,7 @@
     promise-async-src,
     nvim-lint-src,
     formatter-src,
+    dressing-src,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -257,11 +263,16 @@
             buildPhase = ":"; # ignore build phase
           })
 
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "dressing.nvim";
+            src = dressing-src;
+            buildPhase = ":"; # ignore build phase
+          })
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
 
           # pkgs.vimPlugins.codeium-vim
 
-          pkgs.vimPlugins.ChatGPT-nvim
+          # pkgs.vimPlugins.ChatGPT-nvim
           pkgs.vimPlugins.nui-nvim
         ];
 
