@@ -60,6 +60,11 @@
       flake = false;
     };
 
+    dressing-src = {
+      url = "github:stevearc/dressing.nvim";
+      flake = false;
+    };
+
   };
 
   outputs = {
@@ -78,6 +83,7 @@
     promise-async-src,
     nvim-lint-src,
     formatter-src,
+    dressing-src,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -131,19 +137,23 @@
           gD = "declaration";
           gi = "implementation";
           gt = "type_definition";
-          # gr = "type_references";
-          # gR = "rename";
-          # "<leader>la" = "code_action";
+          gr = "references";
+          gR = "rename";
+          "<leader>la" = "code_action";
         };
         plugins.lsp.keymaps.diagnostic = {
           "<leader>ld" = "open_float";
           "<leader>[d" = "goto_prev";
           "<leader>]d" = "goto_next";
         };
-
+        # clipboard
+        clipboard.providers.xclip.enable = true;
         
         # statusline
         # plugins.lualine.enable = true;
+
+        # which key
+        plugins.which-key.enable = true;
 
         # fold code
         plugins.nvim-ufo.enable = true;
@@ -174,6 +184,18 @@
 
         # tmux
         plugins.tmux-navigator.enable = true;
+
+        # harpoon
+        plugins.harpoon.enable = true;
+
+        # completion
+        plugins.luasnip.enable = true;
+        plugins.nvim-cmp.enable = true;
+        plugins.cmp_luasnip.enable = true;
+        plugins.cmp-buffer.enable = true;
+        plugins.cmp-path.enable = true;
+        plugins.cmp-nvim-lsp.enable = true;
+        plugins.cmp-nvim-lsp-signature-help.enable = true;
 
         extraPlugins = [
           (pkgs.vimUtils.buildVimPlugin {
@@ -241,12 +263,23 @@
             buildPhase = ":"; # ignore build phase
           })
 
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "dressing.nvim";
+            src = dressing-src;
+            buildPhase = ":"; # ignore build phase
+          })
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+
+          # pkgs.vimPlugins.codeium-vim
+
+          # pkgs.vimPlugins.ChatGPT-nvim
+          pkgs.vimPlugins.nui-nvim
         ];
 
         # neovim dependancies
         extraPackages = [
           pkgs.ripgrep
+          pkgs.curl
           # pkgs.nodePackages_latest.prettier
         ];
       };

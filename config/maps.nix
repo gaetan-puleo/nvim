@@ -1,10 +1,10 @@
 {
   # 
-  normal."<leader><leader>" = {
-    silent = true;
-    action = "<Cmd>e# <CR>";
-    desc = "See previous file";
-  };
+  # normal."<leader><leader>" = {
+  #   silent = true;
+  #   action = "<Cmd>e# <CR>";
+  #   desc = "See previous file";
+  # };
   normal."<Space>" = {
     silent = true;
     action = "<Nop";
