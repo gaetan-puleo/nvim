@@ -7,7 +7,7 @@ end
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
--- require("codeium").setup({})
+require("codeium").setup({})
 
 cmp.setup({
     snippet = {
@@ -17,7 +17,7 @@ cmp.setup({
       end,
     },
     sources = cmp.config.sources({
-      -- { name = "codeium" },
+      { name = "codeium" },
       { name = 'luasnip', option = { show_autosnippets = true }}, -- For luasnip users.
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },

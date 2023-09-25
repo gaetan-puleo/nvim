@@ -65,6 +65,10 @@
       flake = false;
     };
 
+    codeium-nvim-src = {
+      url = "github:Exafunction/codeium.nvim";
+    };
+
   };
 
   outputs = {
@@ -84,6 +88,7 @@
     nvim-lint-src,
     formatter-src,
     dressing-src,
+    codeium-nvim-src
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -91,7 +96,7 @@
         extraFiles = {
           lua = "./lua";
         };
-        extraConfigLuaPost = "" + 
+        extraConfigLuaPost = "" +
         "vim.api.nvim_command('set runtimepath^=${self}') \n" +
         "vim.api.nvim_command('let &packpath = &runtimepath') \n" +
         ''
@@ -109,13 +114,13 @@
         '' +
         "vim.wo.numberwidth = 4 -- columns number in gutter";
 
-        
+
         # settings
         globals.mapleader = " "; # Sets the leader key to space
         globals.maplocalleader = " "; # Sets the leader key to space
         options = import "${self}/config/options.nix";
         globals.cursorholdUpdatetime = 100;
-    
+
 
 
         maps = import "${self}/config/maps.nix";
@@ -148,7 +153,7 @@
         };
         # clipboard
         clipboard.providers.xclip.enable = true;
-        
+
         # statusline
         # plugins.lualine.enable = true;
 
@@ -162,7 +167,7 @@
         plugins.bufferline.enable = true;
 
         # treesitter
-        plugins.treesitter.enable = true;      
+        plugins.treesitter.enable = true;
 
         plugins.ts-autotag.enable = true;
         plugins.treesitter-refactor.enable = true;
@@ -270,7 +275,13 @@
           })
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
 
-          # pkgs.vimPlugins.codeium-vim
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "codeium.nvim";
+            src = codeium-nvim-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+
 
           # pkgs.vimPlugins.ChatGPT-nvim
           pkgs.vimPlugins.nui-nvim
