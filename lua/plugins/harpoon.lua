@@ -1,6 +1,7 @@
 require("harpoon").setup()
 
 vim.keymap.set('n', '<leader>a', '<Cmd>lua require("harpoon.mark").add_file()<CR>', {desc = '[H]arpoon [A]dd file'})
+vim.keymap.set('n', '<leader>c', '<Cmd>lua require("harpoon.mark").clear_all()<CR>', {desc = '[H]arpoon [C]lear files'})
 vim.keymap.set('n', '<leader>r', '<Cmd>lua require("harpoon.mark").rm_file()<CR>', {desc = 'Harpoon [R]emove file'})
 vim.keymap.set('n', '<leader><leader>', '<Cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', {desc = 'Harpoon Toggle UI'})
 vim.keymap.set('n', '<leader>1', '<Cmd>lua require("harpoon.ui").nav_file(1)<CR>', {desc = 'Harpoon file [1]'})
