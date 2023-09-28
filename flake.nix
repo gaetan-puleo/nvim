@@ -65,6 +65,21 @@
       flake = false;
     };
 
+    neotest-jest-src = {
+      url = "github:nvim-neotest/neotest-jest";
+      flake = false;
+    };
+
+    fixcursorhold-src = {
+      url = "github:antoinemadec/FixCursorHold.nvim";
+      flake = false;
+    };
+
+    nvim-neotest-src = {
+      url = "github:nvim-neotest/neotest";
+      flake = false;
+    };
+
     codeium-nvim-src = {
       url = "github:Exafunction/codeium.nvim";
     };
@@ -88,7 +103,10 @@
     nvim-lint-src,
     formatter-src,
     dressing-src,
-    codeium-nvim-src
+    codeium-nvim-src,
+    nvim-neotest-src,
+    neotest-jest-src,
+    fixcursorhold-src
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -281,6 +299,23 @@
             buildPhase = ":"; # ignore build phase
           })
 
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "FixCursorHold.nvim";
+            src = fixcursorhold-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "nvim-neotest";
+            src = nvim-neotest-src;
+            buildPhase = ":"; # ignore build phase
+          })
+
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "neotest-test";
+            src = neotest-jest-src;
+            buildPhase = ":"; # ignore build phase
+          })
 
 
           # pkgs.vimPlugins.ChatGPT-nvim
@@ -292,6 +327,7 @@
           pkgs.ripgrep
           pkgs.curl
           # pkgs.nodePackages_latest.prettier
+          pkgs.nodePackages.prettier # install prettier in the $PATH
         ];
       };
     in {

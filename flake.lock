@@ -58,6 +58,22 @@
         "type": "github"
       }
     },
+    "fixcursorhold-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676287387,
+        "narHash": "sha256-HwaKkwANoNHe512eDvuOJ48tG8nDh7r67magi8OA/Vw=",
+        "owner": "antoinemadec",
+        "repo": "FixCursorHold.nvim",
+        "rev": "1900f89dc17c603eec29960f57c00bd9ae696495",
+        "type": "github"
+      },
+      "original": {
+        "owner": "antoinemadec",
+        "repo": "FixCursorHold.nvim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -178,6 +194,22 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "gitignore.nix",
+        "type": "github"
+      }
+    },
+    "neotest-jest-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693738627,
+        "narHash": "sha256-cu0DGMrO94JVmfxxA3FD1+RwVRn3rMyGJ8aDQyozWAw=",
+        "owner": "nvim-neotest",
+        "repo": "neotest-jest",
+        "rev": "ae559fbd405084ee38dd711eede6d74f3dc1d463",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neotest",
+        "repo": "neotest-jest",
         "type": "github"
       }
     },
@@ -327,6 +359,22 @@
         "type": "github"
       }
     },
+    "nvim-neotest-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1694346214,
+        "narHash": "sha256-PDT7kzmEuXKDT1FC2ZA51DoCrHuBncSxoGOIJdn2+F0=",
+        "owner": "nvim-neotest",
+        "repo": "neotest",
+        "rev": "1e67a504d03def3a6a1125d934cb511680f72555",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neotest",
+        "repo": "neotest",
+        "type": "github"
+      }
+    },
     "nvim-scrollbar-src": {
       "flake": false,
       "locked": {
@@ -463,14 +511,17 @@
       "inputs": {
         "codeium-nvim-src": "codeium-nvim-src",
         "dressing-src": "dressing-src",
+        "fixcursorhold-src": "fixcursorhold-src",
         "flake-utils": "flake-utils_2",
         "formatter-src": "formatter-src",
+        "neotest-jest-src": "neotest-jest-src",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "nvim-colorizer-src": "nvim-colorizer-src",
         "nvim-comment-src": "nvim-comment-src",
         "nvim-hlslens-src": "nvim-hlslens-src",
         "nvim-lint-src": "nvim-lint-src",
+        "nvim-neotest-src": "nvim-neotest-src",
         "nvim-scrollbar-src": "nvim-scrollbar-src",
         "nvim-spectre-src": "nvim-spectre-src",
         "nvim-window-picker-src": "nvim-window-picker-src",
