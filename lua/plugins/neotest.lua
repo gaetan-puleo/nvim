@@ -1,7 +1,7 @@
 require("neotest").setup({
   adapters = {
       require('neotest-jest')({
-        jestCommand = "npm test --",
+        jestCommand = "npm test -- --watch",
         jestConfigFile = "jest.config.ts",
         env = { CI = true, NODE_ENV = "test" },
         cwd = function(path)
