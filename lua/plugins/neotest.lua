@@ -10,3 +10,8 @@ require("neotest").setup({
       }),
   },
 })
+
+local map = vim.api.nvim_set_keymap
+
+vim.keymap.set('n', '<leader>tf', "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", {desc = '[T]est [F]ile'})
+vim.keymap.set('n', '<leader>tf', "<Cmd>lua require('neotest').run.run())<CR>", {desc = '[T]est [N]earest'})
