@@ -4,6 +4,7 @@
     nixvim.url = "github:nix-community/nixvim";
     flake-utils.url = "github:numtide/flake-utils";
 
+
   # plugins
     nvim-window-picker-src = {
       url = "github:s1n7ax/nvim-window-picker";
@@ -80,6 +81,11 @@
       flake = false;
     };
 
+    gen-nvim-src = {
+      url = "github:David-Kunz/gen.nvim";
+      flake = false;
+    };
+
     codeium-nvim-src = {
       url = "github:Exafunction/codeium.nvim";
     };
@@ -106,7 +112,8 @@
     codeium-nvim-src,
     nvim-neotest-src,
     neotest-jest-src,
-    fixcursorhold-src
+    fixcursorhold-src,
+    gen-nvim-src
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -317,6 +324,11 @@
             buildPhase = ":"; # ignore build phase
           })
 
+          (pkgs.vimUtils.buildVimPlugin {
+            name = "gen.nvim";
+            src = gen-nvim-src;
+            buildPhase = ":"; # ignore build phase
+          })
 
           # pkgs.vimPlugins.ChatGPT-nvim
           pkgs.vimPlugins.nui-nvim

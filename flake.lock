@@ -175,6 +175,22 @@
         "type": "github"
       }
     },
+    "gen-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696251532,
+        "narHash": "sha256-Y09LugjArVPQzDGYR9TwBAToG8cxdG16PPM3Ys8PACQ=",
+        "owner": "David-Kunz",
+        "repo": "gen.nvim",
+        "rev": "9d49fe37dd07ba0935eca5a5454a8a0c1174cf04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "David-Kunz",
+        "repo": "gen.nvim",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -514,6 +530,7 @@
         "fixcursorhold-src": "fixcursorhold-src",
         "flake-utils": "flake-utils_2",
         "formatter-src": "formatter-src",
+        "gen-nvim-src": "gen-nvim-src",
         "neotest-jest-src": "neotest-jest-src",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
