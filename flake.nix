@@ -152,6 +152,7 @@
         # colorscheme
         colorschemes.catppuccin.enable = true;
         colorschemes.catppuccin.flavour = "mocha";
+        colorschemes.catppuccin.transparentBackground = true;
 
         # lsp
         plugins.lsp.enable = true;
