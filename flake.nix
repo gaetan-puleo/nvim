@@ -181,7 +181,7 @@
         clipboard.providers.xclip.enable = true;
 
         # statusline
-        # plugins.lualine.enable = true;
+        plugins.lualine.enable = true;
 
         # which key
         plugins.which-key.enable = true;
