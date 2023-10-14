@@ -331,7 +331,6 @@
 
         # neovim dependancies
         extraPackages = [
-          pkgs.luajitPackages.jsregexp
           pkgs.ripgrep
           pkgs.curl
           # pkgs.nodePackages_latest.prettier
