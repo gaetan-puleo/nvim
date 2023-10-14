@@ -125,17 +125,11 @@
         "vim.api.nvim_command('set runtimepath^=${self}') \n" +
         "vim.api.nvim_command('let &packpath = &runtimepath') \n" +
         ''
-        if(not vim.g.vscode) then
-          require('settings/global')
-          require('settings/mapping')
-          require('plugin-list')
+        require('settings/global')
+        require('settings/mapping')
+        require('plugin-list')
+        require('snippets')
 
-        end
-
-        if(vim.g.vscode) then
-          require('settings/global')
-          require('settings/mapping')
-        end
         '' +
         "vim.wo.numberwidth = 4 -- columns number in gutter";
 
