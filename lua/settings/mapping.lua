@@ -31,3 +31,7 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- move cursor to 1 line to the bottom
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+vim.cmd [[
+ au BufRead,BufNewFile *.njk set filetype=html
+ au BufRead,BufNewFile *.ejs set filetype=html
+]]
